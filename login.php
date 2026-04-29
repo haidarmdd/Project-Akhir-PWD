@@ -9,7 +9,7 @@
      <h2>LOGIN</h2>
 
      <form action="POST" action="proses_login.php">
-        <input type="text" name="username" placeholder="Username" required><br><br>
+        <input type="text" name="NIM" placeholder="NIM" required><br><br>
         <input type="password" name="password" placeholder="Password" required><br><br>
         <button type="submit">LOGIN</button>
      </form>
