@@ -9,12 +9,12 @@
      <h2>LOGIN</h2>
 
      <form action="POST" action="proses_login.php">
-        <input type="text" name="NIM" placeholder="NIM" required><br><br>
+        <input type="text" name="NIM YAA" placeholder="NIM YAA" required><br><br>
         <input type="password" name="password" placeholder="Password" required><br><br>
         <button type="submit">LOGIN</button>
      </form>
         
     <P>Belum memiliki akun? <a href="daftar.php">Daftar disini</a></P>
-    
+
 </body>
 </html>
