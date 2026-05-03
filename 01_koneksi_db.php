@@ -8,7 +8,5 @@
 
     if ($konek->connect_error) {
         die("Maaf koneksi gagal" . $konek->connect_error);
-    } else {
-         echo "Koneksi berhasil";
     }
 ?>
