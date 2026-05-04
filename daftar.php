@@ -31,7 +31,7 @@
         <input type="text" name="nim" placeholder="Masukkan NIM"><br><br>
 
         <label>Password</label><br>
-        <input type="password" name="Password" placeholder="Buat Password"><br><br>
+        <input type="password" name="password" placeholder="Buat Password"><br><br>
     
         <button type="submit">Daftar</button>
      </form>
