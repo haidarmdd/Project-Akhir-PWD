@@ -41,6 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Simpan</button>
     </form>
     <br>
-    <a href="05_dasboard.php">Kembali ke Dasboars</a>
+    <a href="dasboard.php">Kembali ke Dasboars</a>
 </body>
 </html>
