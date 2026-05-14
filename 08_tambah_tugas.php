@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <option value="Praktikum">Praktikum</option>
         </select><br><br>
         Tanggal Deadline: <input type="date" name="tanggal" required><br><br>
-        <button> type="submit">Simpan</button>
+        <button type="submit">Simpan</button>
     </form>
     <br>
     <a href="05_dasboard.php">Kembali ke Dasboars</a>
