@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '01_konkesi_db.php';
+include '01_koneksi_db.php';
 
 $id = $_GET ['id'];
 
