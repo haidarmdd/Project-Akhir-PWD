@@ -31,7 +31,7 @@
     
     <p>
         <a href="08_tambah_tugas.php">[+] Tambah Deadline</a>
-        <a href="logout.php">[Logout]</a>
+        <a href="07_logout.php">[Logout]</a>
     </p>
 
     <hr>
