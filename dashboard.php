@@ -1,104 +1,130 @@
 <!DOCTYPE html>
 <?php
-    session_start();
-    include '01_koneksi_db.php';
+session_start();
+include '01_koneksi_db.php';
 
-    // cek udah login atau belum
-    if(!isset($_SESSION['user_id'])) {
-        header('Location: login.php');
-        exit;
-    }
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
 
-    // ambil data user yang sedang pakai (login)
-    $user_id    = $_SESSION['user_id'];
-    $nama       = $_SESSION['nama'];
+$user_id = $_SESSION['user_id'];
+$nama    = $_SESSION['nama'];
 
-    // Akses database ambil data deadline milik user ini saja
-    $query = "SELECT * FROM deadlines WHERE user_id = '$user_id' ORDER BY tanggal_deadline ASC";
-    $result = $konek->query($query);
-    ?>
+// Ambil semua deadline milik user
+$query  = "SELECT * FROM deadlines WHERE user_id = '$user_id' ORDER BY tanggal_deadline ASC";
+$result = $konek->query($query);
 
-<html lang="en">
+// Hitung statistik
+$total   = $konek->query("SELECT COUNT(*) as n FROM deadlines WHERE user_id='$user_id'")->fetch_assoc()['n'];
+$belum   = $konek->query("SELECT COUNT(*) as n FROM deadlines WHERE user_id='$user_id' AND status='belum'")->fetch_assoc()['n'];
+$sedang  = $konek->query("SELECT COUNT(*) as n FROM deadlines WHERE user_id='$user_id' AND status='sedang'")->fetch_assoc()['n'];
+$selesai = $konek->query("SELECT COUNT(*) as n FROM deadlines WHERE user_id='$user_id' AND status='selesai'")->fetch_assoc()['n'];
+?>
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dasboard - DeadlineKu</title>
+    <title>Dashboard - DeadlineKu</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h2>Halo, <?php echo $nama; ?>!</h2>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-brand">Deadline<span>Ku</span></div>
+        <div class="navbar-menu">
+            <div class="navbar-user">Halo, <span><?php echo $nama; ?></span></div>
+            <a href="logout.php" class="btn btn-secondary btn-sm">Logout</a>
+        </div>
+    </nav>
 
-    <!-- Menu Navigasi Sederhana -->
-    
-    <p>
-        <a href="tambah_tugas.php">[+] Tambah Deadline</a>
-        <a href="logout.php">[Logout]</a>
-    </p>
+    <div class="container">
 
-    <hr>
+        <!-- PAGE HEADER -->
+        <div class="dashboard-header">
+            <div>
+                <h1 class="page-title">Dashboard</h1>
+                <p class="page-subtitle">Pantau semua deadline akademik kamu</p>
+            </div>
+            <a href="tambah_tugas.php" class="btn btn-primary">+ Tambah Deadline</a>
+        </div>
 
-    <h3>Daftar Deadline Kamu</h3>
+        <!-- STAT CARDS -->
+        <div class="stats-grid">
+            <div class="stat-card stat-total">
+                <div class="stat-number"><?php echo $total; ?></div>
+                <div class="stat-label">Total Deadline</div>
+            </div>
+            <div class="stat-card stat-belum">
+                <div class="stat-number"><?php echo $belum; ?></div>
+                <div class="stat-label">Belum Dikerjakan</div>
+            </div>
+            <div class="stat-card stat-sedang">
+                <div class="stat-number"><?php echo $sedang; ?></div>
+                <div class="stat-label">Sedang Dikerjakan</div>
+            </div>
+            <div class="stat-card stat-selesai">
+                <div class="stat-number"><?php echo $selesai; ?></div>
+                <div class="stat-label">Selesai</div>
+            </div>
+        </div>
 
-    <!-- Menu Navigasi Sederhana -->
-    <table border="1" cellpadding="8" cellspacing="0">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Judul</th>
-                <th>Mata Kuliah</th>
-                <th>Jenis</th>
-                <th>Deadline</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            // Perulangan & array, loop data dari DB
-            $no =1;
-            while ($row = $result->fetch_assoc()) {
+        <!-- TABEL DEADLINE -->
+        <div class="table-wrapper">
+            <div class="table-header">
+                <span class="table-title">Daftar Deadline</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Judul</th>
+                        <th>Mata Kuliah</th>
+                        <th>Jenis</th>
+                        <th>Deadline</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $no = 1;
+                    $hari_ini = date('Y-m-d');
+                    while ($row = $result->fetch_assoc()):
+                        $status = $row['status'];
+                        if ($status != 'selesai' && $row['tanggal_deadline'] < $hari_ini) {
+                            $status_label = 'terlewat';
+                        } else {
+                            $status_label = $status;
+                        }
+                        $jenis_lower = strtolower($row['jenis']);
+                    ?>
+                    <tr>
+                        <td class="td-no"><?php echo $no++; ?></td>
+                        <td class="judul"><?php echo $row['judul']; ?></td>
+                        <td><?php echo $row['mata_kuliah']; ?></td>
+                        <td><span class="badge badge-<?php echo $jenis_lower; ?>"><?php echo $row['jenis']; ?></span></td>
+                        <td><?php echo date('d M Y', strtotime($row['tanggal_deadline'])); ?></td>
+                        <td><span class="badge badge-<?php echo $status_label; ?>"><?php echo strtoupper($status_label); ?></span></td>
+                        <td>
+                            <div class="action-group">
+                                <a href="edit_tugas.php?id=<?php echo $row['id']; ?>" class="btn btn-secondary btn-sm">Edit</a>
+                                <a href="hapus_tugas.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus deadline ini?')">Hapus</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endwhile; ?>
 
-                // Percabangan, logika penentuan status (terlewat atau tidak)
-                $status_tampil = $row['status'];
-                $hari_ini = date('Y-m-d');
+                    <?php if ($total == 0): ?>
+                    <tr class="empty-row">
+                        <td colspan="7">Belum ada deadline. Yuk tambah deadline pertamamu!</td>
+                    </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
 
-                // Jika status belum selesai & tanggal deadline sudah lewat
-                if ($row['status'] != 'selesai' && $row['tanggal_deadline'] < $hari_ini) {
-                    $status_tampil = "TERLEWAT";
-                }
-            ?>
-
-            <!-- Baris Tabel Dinamis -->
-             <tr>
-                <td><?php echo $no++; ?></td>
-                <td><?php echo $row['judul']; ?></td>
-                <td><?php echo $row['mata_kuliah']; ?></td>
-                <td><?php echo $row['jenis']; ?></td>
-                <td><?php echo $row['tanggal_deadline']; ?></td>
-
-                <!-- Tampilkan status dengan format teks biasa -->
-                 <td><?php echo strtoupper($status_tampil); ?></td>
-
-                 <td>
-                    <!-- Link Edit dan Hapus -->
-                     <a href="edit_tugas.php?id=<?php echo $row['id'] ?>">Edit</a>
-                     <a href="hapus_tugas.php?id=<?php echo $row['id'] ?>" onclick="return confirm('yakin ingin menghapus?')">Hapus</a>
-                 </td>
-             </tr>
-
-             <?php
-            } // Ahir while loop
-            ?>
-
-            <!-- Jika data kosong -->
-             <?php if ($result->num_rows == 0): ?>
-             <tr>
-                <td colspan="7" style="text-align:center;">Belum ada data deadline.</td>
-             </tr>
-             <?php endif; ?>
-        </tbody>
-    </table>
-
-
+    </div>
 </body>
 </html>

@@ -6,19 +6,23 @@ if (isset($_SESSION['user_id'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deadline Tracker</title>
+    <title>DeadlineKu</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Deadline Tracker</h1>
-    <p>Kelola deadline tugas dan ujian kuliahmu</p>
-    <hr>
-    <p>
-        <a href="login.php">Login</a>
-        <a href="daftar.php">Daftar Akun Baru</a>
-    </p>
+    <div class="landing-wrapper">
+        <div>
+            <div class="landing-title">Deadline<span>Ku</span></div>
+            <p class="landing-desc">Kelola deadline tugas dan ujian kuliahmu dalam satu tempat. Rapi, terstruktur, dan tidak ada yang terlewat.</p>
+            <div class="landing-actions">
+                <a href="login.php" class="btn btn-primary">Login</a>
+                <a href="daftar.php" class="btn btn-secondary">Daftar Akun</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
