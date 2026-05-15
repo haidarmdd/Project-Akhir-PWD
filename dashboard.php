@@ -1,12 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dasboard - DeadlineKu</title>
-</head>
-<body>
-    <?php
+<?php
     session_start();
     include '01_koneksi_db.php';
 
@@ -25,13 +18,21 @@
     $result = $konek->query($query);
     ?>
 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dasboard - DeadlineKu</title>
+</head>
+<body>
+
     <h2>Halo, <?php echo $nama; ?>!</h2>
 
     <!-- Menu Navigasi Sederhana -->
     
     <p>
-        <a href="08_tambah_tugas.php">[+] Tambah Deadline</a>
-        <a href="07_logout.php">[Logout]</a>
+        <a href="tambah_tugas.php">[+] Tambah Deadline</a>
+        <a href="logout.php">[Logout]</a>
     </p>
 
     <hr>
@@ -80,8 +81,8 @@
 
                  <td>
                     <!-- Link Edit dan Hapus -->
-                     <a href="10_edit_tugas.php?id=<?php echo $row['id'] ?>">Edit</a>
-                     <a href="12_hapus_tugas.php?id=<?php echo $row['id'] ?>" onclick="return confirm('yakin ingin menghapus?')">Hapus</a>
+                     <a href="edit_tugas.php?id=<?php echo $row['id'] ?>">Edit</a>
+                     <a href="hapus_tugas.php?id=<?php echo $row['id'] ?>" onclick="return confirm('yakin ingin menghapus?')">Hapus</a>
                  </td>
              </tr>
 
