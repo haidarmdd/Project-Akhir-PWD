@@ -9,11 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jenis = $_POST['jenis'];
     $tgl = $_POST['tanggal'];
 
+    $semester = 1;
+    $status = 'belum';
+
     // Simpan ke DB
-    $sql = "INSERT INTO dealines (user_id, judul, mata_kuliah, jenis, tanggal_deadline) VALUE ('$user_id', '$judul', '$matkul', '$jenis', '$tgl')";
+    $sql = "INSERT INTO deadlines (user_id, judul, mata_kuliah, jenis, tanggal_deadline) VALUES ('$user_id', '$judul', '$matkul', '$jenis', '$tgl')";
 
     if ($konek->query($sql)) {
-        header("location: 05_dasboard.php");
+        header("location: dashboard.php");
     } else {
         echo "Gagal menyimpan data.";
     }

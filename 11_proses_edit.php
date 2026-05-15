@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($konek->query($sql)) {
         // Jika berhasil, redirect ke dashboard
-        header("Location: 05_dashboard.php");
+        header("Location: dashboard.php");
         exit;
     } else {
         // Jika gagal, tampilkan error dari MySQL

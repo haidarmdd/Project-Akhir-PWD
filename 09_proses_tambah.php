@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($konek->query($sql)) {
         // Jika berhasil, redirect ke dashboard
-        header("location: dashboard.php");
+        header("Location: dashboard.php");
         exit;
     } else {
         // JIka gagal, tmapilkan error

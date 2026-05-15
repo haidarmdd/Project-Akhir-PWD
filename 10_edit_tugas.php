@@ -2,7 +2,7 @@
 session_start();
 include '01_koneksi_db.php';
 
-$id = $_GET ['id'];
+$id = $_GET['id'];
 
 // Jika form disubmit (POST)
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){

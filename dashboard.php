@@ -59,7 +59,7 @@
 
                 // Percabangan, logika penentuan status (terlewat atau tidak)
                 $status_tampil = $row['status'];
-                $hari_ini = date('y-m-d');
+                $hari_ini = date('Y-m-d');
 
                 // Jika status belum selesai & tanggal deadline sudah lewat
                 if ($row['status'] != 'selesai' && $row['tanggal_deadline'] < $hari_ini) {
