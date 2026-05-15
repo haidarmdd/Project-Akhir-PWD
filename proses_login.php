@@ -1,40 +1,41 @@
-<?php 
-    session_start();
-    include '01_koneksi_db.php';
+<?php
+session_start();
+include '01_koneksi_db.php';
 
-    // tangkap dari POST di proses login
-    $nim = $_POST['nim'];
-    $password = $_POST['password'];
+// Ambil data dari formulir login
+$nim      = $_POST['nim'];
+$password = $_POST['password'];
 
-    // buat ngecek apakah ada input yang kosong dari user 
-    if ($nim == '' || $password == ''){
-        header('Location: login.php?error=kosong');
-        exit;
-    }
+// Cek apakah ada kolom yang kosong
+if ($nim == '' || $password == '') {
+    header('Location: login.php?error=kosong');
+    exit;
+}
 
-    // mengecek user di database dengan NIM
-    $cek = mysqli_query($konek, "SELECT * FROM users WHERE nim = '$nim'");
-    $user = mysqli_fetch_assoc($cek);
+// Cari pengguna berdasarkan NIM di database
+$cek  = mysqli_query($konek, "SELECT * FROM users WHERE nim = '$nim'");
+$user = mysqli_fetch_assoc($cek);
 
-    if(!$user){
-        header('Location: login.php?error=belum_daftar');
-        exit;
-    }
+// Jika NIM tidak ditemukan di database
+if (!$user) {
+    header('Location: login.php?error=belum_daftar');
+    exit;
+}
 
-    // mengecek password dari nim yang dimasukkan ke database
-    if ($user && password_verify($password, $user['password'])) {
-        
-        // kalo password nya cocok, simpan data user ke session
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['nama'] = $user['nama'];
-        $_SESSION['nim'] = $user['nim'];
+// Cocokkan password yang diinput dengan password terenkripsi di database
+if ($user && password_verify($password, $user['password'])) {
 
-        // lanjut ke dashboard jika berhasil login + simpan data 
-        header('Location: dashboard.php');
-        exit;
-    } else {
-        // kalo passwordnya gacocok / gagal login, balik ke halaman login dengan pesan error
-        header('Location: login.php?error=salah');
-        exit;
-    }
+    // Jika cocok, simpan data pengguna ke sesi
+    $_SESSION['user_id'] = $user['id'];
+    $_SESSION['nama']    = $user['nama'];
+    $_SESSION['nim']     = $user['nim'];
+
+    // Arahkan ke dashboard
+    header('Location: dashboard.php');
+    exit;
+} else {
+    // Jika password salah, kembali ke halaman login dengan pesan error
+    header('Location: login.php?error=salah');
+    exit;
+}
 ?>

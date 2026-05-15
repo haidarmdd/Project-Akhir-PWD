@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <?php
+// Mulai sesi dan cek status login
 session_start();
 include '01_koneksi_db.php';
 
+// Jika belum login, arahkan ke halaman login
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
 }
 
+// Ambil data pengguna dari sesi
 $user_id = $_SESSION['user_id'];
 $nama    = $_SESSION['nama'];
 
-// Ambil semua deadline milik user
+// Ambil semua deadline milik pengguna, urutkan dari yang paling dekat
 $query  = "SELECT * FROM deadlines WHERE user_id = '$user_id' ORDER BY tanggal_deadline ASC";
 $result = $konek->query($query);
 
-// Hitung statistik
+// Hitung jumlah tiap status untuk kartu statistik
 $total   = $konek->query("SELECT COUNT(*) as n FROM deadlines WHERE user_id='$user_id'")->fetch_assoc()['n'];
 $belum   = $konek->query("SELECT COUNT(*) as n FROM deadlines WHERE user_id='$user_id' AND status='belum'")->fetch_assoc()['n'];
 $sedang  = $konek->query("SELECT COUNT(*) as n FROM deadlines WHERE user_id='$user_id' AND status='sedang'")->fetch_assoc()['n'];
@@ -30,50 +33,50 @@ $selesai = $konek->query("SELECT COUNT(*) as n FROM deadlines WHERE user_id='$us
 </head>
 <body>
 
-    <!-- NAVBAR -->
+    <!-- BILAH NAVIGASI -->
     <nav class="navbar">
         <div class="navbar-brand">Deadline<span>Ku</span></div>
         <div class="navbar-menu">
-            <div class="navbar-user">Halo, <span><?php echo $nama; ?></span></div>
-            <a href="logout.php" class="btn btn-secondary btn-sm">Logout</a>
+            <div class="navbar-pengguna">Halo, <span><?php echo $nama; ?></span></div>
+            <a href="logout.php" class="tombol tombol-sekunder tombol-kecil">Keluar</a>
         </div>
     </nav>
 
-    <div class="container">
+    <div class="wadah">
 
-        <!-- PAGE HEADER -->
-        <div class="dashboard-header">
+        <!-- JUDUL HALAMAN -->
+        <div class="header-dashboard">
             <div>
-                <h1 class="page-title">Dashboard</h1>
-                <p class="page-subtitle">Pantau semua deadline akademik kamu</p>
+                <h1 class="judul-halaman">Dashboard</h1>
+                <p class="subjudul-halaman">Pantau semua deadline akademik kamu</p>
             </div>
-            <a href="tambah_tugas.php" class="btn btn-primary">+ Tambah Deadline</a>
+            <a href="tambah_tugas.php" class="tombol tombol-utama">+ Tambah Deadline</a>
         </div>
 
-        <!-- STAT CARDS -->
-        <div class="stats-grid">
-            <div class="stat-card stat-total">
-                <div class="stat-number"><?php echo $total; ?></div>
-                <div class="stat-label">Total Deadline</div>
+        <!-- KARTU STATISTIK -->
+        <div class="grid-statistik">
+            <div class="kartu-statistik stat-total">
+                <div class="angka-statistik"><?php echo $total; ?></div>
+                <div class="label-statistik">Total Deadline</div>
             </div>
-            <div class="stat-card stat-belum">
-                <div class="stat-number"><?php echo $belum; ?></div>
-                <div class="stat-label">Belum Dikerjakan</div>
+            <div class="kartu-statistik stat-belum">
+                <div class="angka-statistik"><?php echo $belum; ?></div>
+                <div class="label-statistik">Belum Dikerjakan</div>
             </div>
-            <div class="stat-card stat-sedang">
-                <div class="stat-number"><?php echo $sedang; ?></div>
-                <div class="stat-label">Sedang Dikerjakan</div>
+            <div class="kartu-statistik stat-sedang">
+                <div class="angka-statistik"><?php echo $sedang; ?></div>
+                <div class="label-statistik">Sedang Dikerjakan</div>
             </div>
-            <div class="stat-card stat-selesai">
-                <div class="stat-number"><?php echo $selesai; ?></div>
-                <div class="stat-label">Selesai</div>
+            <div class="kartu-statistik stat-selesai">
+                <div class="angka-statistik"><?php echo $selesai; ?></div>
+                <div class="label-statistik">Selesai</div>
             </div>
         </div>
 
-        <!-- TABEL DEADLINE -->
-        <div class="table-wrapper">
-            <div class="table-header">
-                <span class="table-title">Daftar Deadline</span>
+        <!-- TABEL DAFTAR DEADLINE -->
+        <div class="pembungkus-tabel">
+            <div class="header-tabel">
+                <span class="judul-tabel">Daftar Deadline</span>
             </div>
             <table>
                 <thead>
@@ -91,33 +94,35 @@ $selesai = $konek->query("SELECT COUNT(*) as n FROM deadlines WHERE user_id='$us
                     <?php
                     $no = 1;
                     $hari_ini = date('Y-m-d');
-                    while ($row = $result->fetch_assoc()):
-                        $status = $row['status'];
-                        if ($status != 'selesai' && $row['tanggal_deadline'] < $hari_ini) {
-                            $status_label = 'terlewat';
+                    while ($baris = $result->fetch_assoc()):
+                        // Tentukan status tampilan (cek apakah sudah terlewat)
+                        $status = $baris['status'];
+                        if ($status != 'selesai' && $baris['tanggal_deadline'] < $hari_ini) {
+                            $label_status = 'terlewat';
                         } else {
-                            $status_label = $status;
+                            $label_status = $status;
                         }
-                        $jenis_lower = strtolower($row['jenis']);
+                        $jenis_kecil = strtolower($baris['jenis']);
                     ?>
                     <tr>
-                        <td class="td-no"><?php echo $no++; ?></td>
-                        <td class="judul"><?php echo $row['judul']; ?></td>
-                        <td><?php echo $row['mata_kuliah']; ?></td>
-                        <td><span class="badge badge-<?php echo $jenis_lower; ?>"><?php echo $row['jenis']; ?></span></td>
-                        <td><?php echo date('d M Y', strtotime($row['tanggal_deadline'])); ?></td>
-                        <td><span class="badge badge-<?php echo $status_label; ?>"><?php echo strtoupper($status_label); ?></span></td>
+                        <td class="td-nomor"><?php echo $no++; ?></td>
+                        <td class="judul"><?php echo $baris['judul']; ?></td>
+                        <td><?php echo $baris['mata_kuliah']; ?></td>
+                        <td><span class="lencana lencana-<?php echo $jenis_kecil; ?>"><?php echo $baris['jenis']; ?></span></td>
+                        <td><?php echo date('d M Y', strtotime($baris['tanggal_deadline'])); ?></td>
+                        <td><span class="lencana lencana-<?php echo $label_status; ?>"><?php echo strtoupper($label_status); ?></span></td>
                         <td>
-                            <div class="action-group">
-                                <a href="edit_tugas.php?id=<?php echo $row['id']; ?>" class="btn btn-secondary btn-sm">Edit</a>
-                                <a href="hapus_tugas.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus deadline ini?')">Hapus</a>
+                            <div class="grup-aksi">
+                                <a href="edit_tugas.php?id=<?php echo $baris['id']; ?>" class="tombol tombol-sekunder tombol-kecil">Edit</a>
+                                <a href="hapus_tugas.php?id=<?php echo $baris['id']; ?>" class="tombol tombol-bahaya tombol-kecil" onclick="return confirm('Yakin ingin menghapus deadline ini?')">Hapus</a>
                             </div>
                         </td>
                     </tr>
                     <?php endwhile; ?>
 
+                    <!-- Tampilkan pesan jika belum ada data -->
                     <?php if ($total == 0): ?>
-                    <tr class="empty-row">
+                    <tr class="baris-kosong">
                         <td colspan="7">Belum ada deadline. Yuk tambah deadline pertamamu!</td>
                     </tr>
                     <?php endif; ?>

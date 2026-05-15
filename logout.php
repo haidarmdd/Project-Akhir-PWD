@@ -1,5 +1,8 @@
 <?php
+// Mulai sesi lalu hapus semua data sesi
 session_start();
-session_destroy(); // Hapus sesi
-Header("location: index.php"); // kembali ke halaman depan
+session_destroy();
+
+// Arahkan ke halaman utama setelah keluar
+header("location: index.php");
 ?>

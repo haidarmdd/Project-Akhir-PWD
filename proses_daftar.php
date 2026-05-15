@@ -1,37 +1,35 @@
 <?php
 include '01_koneksi_db.php';
 
-// tangkap dari form daftar 
-$nama       = $_POST['nama'];
-$nim        = $_POST['nim'];
-$password   = $_POST['password'];
+// Ambil data dari formulir pendaftaran
+$nama     = $_POST['nama'];
+$nim      = $_POST['nim'];
+$password = $_POST['password'];
 
-// cek kondisi dari daftar apakah ada data yang belum di isi atau tidak 
-if($nama == '' || $nim == '' || $password == '' ){
+// Cek apakah ada kolom yang belum diisi
+if ($nama == '' || $nim == '' || $password == '') {
     header('Location: daftar.php?error=kosong');
     exit;
 }
 
-// cek kalau nim udah kedaftar di database
+// Cek apakah NIM sudah pernah terdaftar di database
 $cek = mysqli_query($konek, "SELECT * FROM users WHERE nim = '$nim'");
-$ada = mysqli_fetch_assoc($cek); // fetch_assoc buat ngambil satu baris dari yang di cek
+$ada = mysqli_fetch_assoc($cek);
 
-// cek jika nim sudah ada (terdaftar)
-if($ada){
+// Jika NIM sudah ada, tolak pendaftaran
+if ($ada) {
     header('Location: daftar.php?error=nim_ada');
     exit;
 }
 
-// enkripsi password biar ngga langsung tampil sesuai yang di input user
-// misal input "haidar3452" bakal jadi "$2y$10$abc123xyzhashedpassword.."
+// Enkripsi password sebelum disimpan ke database
+// Contoh: "password123" menjadi "$2y$10$abc123xyzhashedpassword.."
 $password_terenkripsi = password_hash($password, PASSWORD_DEFAULT);
 
-// simpan daftar ke dalam database
-mysqli_query($konek, "INSERT INTO users 
-(nama, nim, password) VALUES 
-('$nama', '$nim', '$password_terenkripsi')");
+// Simpan data pengguna baru ke database
+mysqli_query($konek, "INSERT INTO users (nama, nim, password) VALUES ('$nama', '$nim', '$password_terenkripsi')");
 
-// buat pindha ke halaman login kalo daftar berhasil
+// Arahkan ke halaman login jika pendaftaran berhasil
 header('Location: login.php?sukses');
 exit;
 ?>

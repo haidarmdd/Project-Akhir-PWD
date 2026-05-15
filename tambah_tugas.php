@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <?php
+// Mulai sesi dan cek login
 session_start();
 include '01_koneksi_db.php';
 
+// Jika belum login, arahkan ke halaman login
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
 
+// Proses penyimpanan data jika formulir dikirim
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id  = $_SESSION['user_id'];
     $judul    = $_POST['judul'];
@@ -15,16 +18,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jenis    = $_POST['jenis'];
     $tgl      = $_POST['tanggal'];
     $semester = $_POST['semester'];
-    $status   = 'belum';
+    $status   = 'belum'; // Status awal selalu belum dikerjakan
 
+    // Simpan deadline baru ke database
     $sql = "INSERT INTO deadlines (user_id, judul, mata_kuliah, jenis, tanggal_deadline, semester, status) 
             VALUES ('$user_id', '$judul', '$matkul', '$jenis', '$tgl', '$semester', '$status')";
 
     if ($konek->query($sql)) {
+        // Jika berhasil, kembali ke dashboard
         header("Location: dashboard.php");
         exit;
     } else {
-        $error = "Gagal menyimpan data: " . $konek->error;
+        $pesan_error = "Gagal menyimpan data: " . $konek->error;
     }
 }
 ?>
@@ -37,59 +42,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
+    <!-- BILAH NAVIGASI -->
     <nav class="navbar">
         <div class="navbar-brand">Deadline<span>Ku</span></div>
         <div class="navbar-menu">
-            <a href="dashboard.php" class="btn btn-secondary btn-sm">← Kembali</a>
+            <a href="dashboard.php" class="tombol tombol-sekunder tombol-kecil">← Kembali</a>
         </div>
     </nav>
 
-    <div class="container">
-        <h1 class="page-title">Tambah Deadline</h1>
-        <p class="page-subtitle">Isi form di bawah untuk menambahkan deadline baru</p>
+    <div class="wadah">
+        <h1 class="judul-halaman">Tambah Deadline</h1>
+        <p class="subjudul-halaman">Isi formulir di bawah untuk menambahkan deadline baru</p>
 
-        <?php if (isset($error)): ?>
-            <div class="alert alert-error"><?php echo $error; ?></div>
+        <!-- Tampilkan pesan error jika penyimpanan gagal -->
+        <?php if (isset($pesan_error)): ?>
+            <div class="peringatan peringatan-error"><?php echo $pesan_error; ?></div>
         <?php endif; ?>
 
-        <div class="form-card">
+        <div class="kartu-formulir">
             <form method="POST">
-                <div class="form-group">
-                    <label class="form-label">Judul Tugas / Deadline</label>
-                    <input type="text" name="judul" class="form-input" placeholder="Contoh: UTS Pemrograman Web" required>
+                <div class="grup-formulir">
+                    <label class="label-formulir">Judul Tugas / Deadline</label>
+                    <input type="text" name="judul" class="input-formulir" placeholder="Contoh: UTS Pemrograman Web" required>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Mata Kuliah</label>
-                    <input type="text" name="mata_kuliah" class="form-input" placeholder="Contoh: Pemweb Dasar" required>
+                <div class="grup-formulir">
+                    <label class="label-formulir">Mata Kuliah</label>
+                    <input type="text" name="mata_kuliah" class="input-formulir" placeholder="Contoh: Pemweb Dasar" required>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Jenis</label>
-                    <select name="jenis" class="form-select">
+                <div class="grup-formulir">
+                    <label class="label-formulir">Jenis</label>
+                    <select name="jenis" class="pilihan-formulir">
                         <option value="Tugas">Tugas</option>
                         <option value="Ujian">Ujian</option>
                         <option value="Praktikum">Praktikum</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Tanggal Deadline</label>
-                    <input type="date" name="tanggal" class="form-input" required>
+                <div class="grup-formulir">
+                    <label class="label-formulir">Tanggal Deadline</label>
+                    <input type="date" name="tanggal" class="input-formulir" required>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Semester</label>
-                    <select name="semester" class="form-select">
-                        <option value="1">Semester 1</option>
-                        <option value="2">Semester 2</option>
-                        <option value="3">Semester 3</option>
-                        <option value="4">Semester 4</option>
-                        <option value="5">Semester 5</option>
-                        <option value="6">Semester 6</option>
-                        <option value="7">Semester 7</option>
-                        <option value="8">Semester 8</option>
+                <div class="grup-formulir">
+                    <label class="label-formulir">Semester</label>
+                    <select name="semester" class="pilihan-formulir">
+                        <?php for($i=1; $i<=8; $i++): ?>
+                        <option value="<?php echo $i; ?>">Semester <?php echo $i; ?></option>
+                        <?php endfor; ?>
                     </select>
                 </div>
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Simpan Deadline</button>
-                    <a href="dashboard.php" class="btn btn-secondary">Batal</a>
+                <div class="aksi-formulir">
+                    <button type="submit" class="tombol tombol-utama">Simpan Deadline</button>
+                    <a href="dashboard.php" class="tombol tombol-sekunder">Batal</a>
                 </div>
             </form>
         </div>

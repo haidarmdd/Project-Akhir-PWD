@@ -7,16 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="auth-wrapper">
-        <div class="auth-card">
-            <div class="auth-logo">DeadlineKu</div>
-            <p class="auth-tagline">Tracker deadline akademik mahasiswa</p>
+    <div class="pembungkus-auth">
+        <div class="kartu-auth">
+            <div class="logo-auth">Deadline<span style="color:crimson ;">Ku</span></div>
+            <p class="tagline-auth">Pelacak deadline akademik mahasiswa</p>
 
-            <h2 class="auth-title">Selamat datang!</h2>
-            <p class="auth-subtitle">Masuk ke akun kamu</p>
+            <h2 class="judul-auth">Selamat datang!</h2>
+            <p class="subjudul-auth">Masuk ke akun kamu</p>
 
             <?php if (isset($_GET['error'])): ?>
-                <div class="alert alert-error">
+                <div class="peringatan peringatan-error">
                     <?php
                     $error = $_GET['error'];
                     if ($error === 'salah') echo 'NIM atau Password kamu salah.';
@@ -27,23 +27,23 @@
             <?php endif; ?>
 
             <?php if (isset($_GET['sukses'])): ?>
-                <div class="alert alert-success">Akun berhasil dibuat! Silahkan login.</div>
+                <div class="peringatan peringatan-sukses">Akun berhasil dibuat! Silahkan login.</div>
             <?php endif; ?>
 
             <form method="POST" action="proses_login.php">
-                <div class="form-group">
-                    <label class="form-label">NIM</label>
-                    <input type="text" name="nim" class="form-input" placeholder="Masukkan NIM kamu">
+                <div class="grup-formulir">
+                    <label class="label-formulir">NIM</label>
+                    <input type="text" name="nim" class="input-formulir" placeholder="Masukkan NIM kamu">
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <input type="password" name="password" class="form-input" placeholder="Masukkan password">
+                <div class="grup-formulir">
+                    <label class="label-formulir">Password</label>
+                    <input type="password" name="password" class="input-formulir" placeholder="Masukkan password">
                 </div>
-                <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:8px;">Login</button>
+                <button type="submit" class="tombol tombol-utama" style="width:100%; justify-content:center; margin-top:8px;">Login</button>
             </form>
 
-            <div class="auth-footer">
-                Belum punya akun? <a href="daftar.php">Daftar disini</a>
+            <div class="footer-auth">
+                Belum punya akun? <a href="daftar.php" style="color: crimson;">Daftar disini</a>
             </div>
         </div>
     </div>

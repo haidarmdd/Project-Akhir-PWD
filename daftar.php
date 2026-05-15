@@ -7,16 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="auth-wrapper">
-        <div class="auth-card">
-            <div class="auth-logo">DeadlineKu</div>
-            <p class="auth-tagline">Tracker deadline akademik mahasiswa</p>
+    <div class="pembungkus-auth">
+        <div class="kartu-auth">
+            <div class="logo-auth">DeadlineKu</div>
+            <p class="tagline-auth">Pelacak deadline akademik mahasiswa</p>
 
-            <h2 class="auth-title">Buat akun baru</h2>
-            <p class="auth-subtitle">Gratis dan mudah</p>
+            <h2 class="judul-auth">Buat akun baru</h2>
+            <p class="subjudul-auth">Gratis dan mudah digunakan</p>
 
             <?php if (isset($_GET['error'])): ?>
-                <div class="alert alert-error">
+                <div class="peringatan peringatan-error">
                     <?php
                     $error = $_GET['error'];
                     if ($error === 'kosong') echo 'Semua data wajib diisi.';
@@ -26,22 +26,22 @@
             <?php endif; ?>
 
             <form method="POST" action="proses_daftar.php">
-                <div class="form-group">
-                    <label class="form-label">Nama Lengkap</label>
-                    <input type="text" name="nama" class="form-input" placeholder="Masukkan nama lengkap">
+                <div class="grup-formulir">
+                    <label class="label-formulir">Nama Lengkap</label>
+                    <input type="text" name="nama" class="input-formulir" placeholder="Masukkan nama lengkap">
                 </div>
-                <div class="form-group">
-                    <label class="form-label">NIM</label>
-                    <input type="text" name="nim" class="form-input" placeholder="Masukkan NIM">
+                <div class="grup-formulir">
+                    <label class="label-formulir">NIM</label>
+                    <input type="text" name="nim" class="input-formulir" placeholder="Masukkan NIM">
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <input type="password" name="password" class="form-input" placeholder="Buat password">
+                <div class="grup-formulir">
+                    <label class="label-formulir">Password</label>
+                    <input type="password" name="password" class="input-formulir" placeholder="Buat password">
                 </div>
-                <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:8px;">Daftar Sekarang</button>
+                <button type="submit" class="tombol tombol-utama" style="width:100%; justify-content:center; margin-top:8px;">Daftar Sekarang</button>
             </form>
 
-            <div class="auth-footer">
+            <div class="footer-auth">
                 Sudah punya akun? <a href="login.php">Login disini</a>
             </div>
         </div>
