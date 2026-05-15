@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 } else {
     // Jika file dibuka tanpa form, kembali ke form
-    header("Location: 08_tambah_tugas.php");
+    header("Location: tambah_tugas.php");
     exit;
 }   
 ?>
