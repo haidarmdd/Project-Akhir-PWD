@@ -30,12 +30,37 @@ $selesai = $konek->query("SELECT COUNT(*) as n FROM deadlines WHERE user_id='$us
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - DeadlineKu</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+    body {
+            background-image: url('red_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+    /* Overlay putih/gelap biar gambar nya redup */
+    body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: rgba(255, 255, 255, -30); /* putih 55% */
+        z-index: 0;
+    }
+
+    /* Biar konten tetap di atas overlay */
+    .navbar, .wadah {
+        position: relative;
+        z-index: 1;
+    }
+
+    </style>
 </head>
 <body>
 
-    <!-- BILAH NAVIGASI -->
+    <!-- NAV -->
     <nav class="navbar">
-        <div class="navbar-brand">Deadline<span>Ku</span></div>
+        <div class="navbar-brand">Deadline<span style="color: crimson;">Ku</span></div>
         <div class="navbar-menu">
             <div class="navbar-pengguna">Halo, <span><?php echo $nama; ?></span></div>
             <a href="logout.php" class="tombol tombol-sekunder tombol-kecil">Keluar</a>

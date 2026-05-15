@@ -66,7 +66,7 @@ a { text-decoration: none; color: inherit; }
 
 /* ===== BILAH NAVIGASI ===== */
 .navbar {
-    background: var(--bg-sekunder);
+    background:#1a1d27;
     border-bottom: 1px solid var(--batas);
     padding: 0 32px;
     height: 64px;
@@ -83,7 +83,7 @@ a { text-decoration: none; color: inherit; }
     font-family: 'Poppins', sans-serif;
     font-size: 18px;
     font-weight: 700;
-    color: var(--aksen-terang);
+    color: whitesmoke;
     letter-spacing: -0.5px;
 }
 
@@ -164,8 +164,8 @@ a { text-decoration: none; color: inherit; }
     transition: all 0.2s;
 }
 
-.tombol-utama { background:crimson; color:whitesmoke; }
-.tombol-utama:hover { background:crimson; transform: translateY(-1px); }
+.tombol-utama { background:green; color:whitesmoke; }
+.tombol-utama:hover { background:green; transform: translateY(-1px); }
 
 .tombol-bahaya { background: var(--merah-redup); color: var(--merah); border: 1px solid rgba(239,68,68,0.3); }
 .tombol-bahaya:hover { background: var(--merah); color: #fff; }
@@ -285,9 +285,7 @@ td:first-child, td.judul { color: var(--teks-utama); font-weight: 500; }
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background: var(--bg-utama);
-    background-image: radial-gradient(ellipse at 20% 50%, rgba(108,99,255,0.08) 0%, transparent 60%),
-                      radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.06) 0%, transparent 50%);
+    background-image: radial-gradient(ellipse at 50% 30%, rgba(108,99,255,0.12) 0%, transparent 60%);
 }
 
 .kartu-auth {
@@ -325,9 +323,9 @@ td:first-child, td.judul { color: var(--teks-utama); font-weight: 500; }
     background-image: radial-gradient(ellipse at 50% 30%, rgba(108,99,255,0.12) 0%, transparent 60%);
 }
 
-.judul-landing { font-family: 'Poppins', sans-serif; font-size: 48px; font-weight: 700; color: var(--teks-utama); margin-bottom: 12px; line-height: 1.1; }
+.judul-landing { font-family: 'Poppins', sans-serif; font-size: 48px; font-weight: 700; color:white; margin-bottom: 12px; line-height: 1.1; }
 .judul-landing span { color: var(--aksen-terang); }
-.deskripsi-landing { font-size: 16px; color:whitesmoke; margin-bottom: 40px; max-width: 500px; }
+.deskripsi-landing { font-size: 16px; color:rgb(255, 255, 255); margin-bottom: 40px; max-width: 500px; }
 .aksi-landing { display: flex; gap: 12px; justify-content: center; }
 
 /* ===== RESPONSIF ===== */

@@ -14,14 +14,13 @@ if (isset($_SESSION['user_id'])) {
     <title>DeadlineKu</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ===== VIDEO LATAR BELAKANG ===== */
-        .video-latar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        /* WARNA BODY */
+        body {
+            background-image: url('red_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
 
         /* ===== LAPISAN GELAP DI ATAS VIDEO ===== */
@@ -58,12 +57,7 @@ if (isset($_SESSION['user_id'])) {
         }
     </style>
 </head>
-<body>
-
-    <!-- VIDEO LATAR BELAKANG BERULANG -->
-    <video class="video-latar" autoplay muted loop playsinline>
-        <source src="bg.mp4" type="video/mp4">
-    </video>
+<body>    
 
     <!-- LAPISAN GELAP TRANSPARAN DI ATAS VIDEO -->
     <div class="lapisan-gelap"></div>
