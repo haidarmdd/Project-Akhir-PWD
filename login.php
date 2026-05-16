@@ -5,15 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - DeadlineKu</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            background-image: url('red_bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-        }
-    </style>
+    
 </head>
 <body>
     <div class="pembungkus-auth">
@@ -48,11 +40,14 @@
                     <label class="label-formulir">Password</label>
                     <input type="password" name="password" class="input-formulir" placeholder="Masukkan password">
                 </div>
-                <button type="submit" class="tombol tombol-utama" style="width:100%; justify-content:center; margin-top:8px;">Login</button>
+                <div style="display:flex; justify-content:center; margin-top:10px;">
+                <button type="submit" class="tombol tombol-utama">Login</button>
+
+                </div>
             </form>
 
             <div class="footer-auth">
-                Belum punya akun? <a href="daftar.php" style="color: crimson;">Daftar disini</a>
+                Belum punya akun? <a href="daftar.php">Daftar disini</a>
             </div>
         </div>
     </div>

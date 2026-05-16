@@ -30,31 +30,7 @@ $selesai = $konek->query("SELECT COUNT(*) as n FROM deadlines WHERE user_id='$us
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - DeadlineKu</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-    body {
-            background-image: url('red_bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-        }
-
-    /* Overlay putih/gelap biar gambar nya redup */
-    body::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        background: rgba(255, 255, 255, -30); /* putih 55% */
-        z-index: 0;
-    }
-
-    /* Biar konten tetap di atas overlay */
-    .navbar, .wadah {
-        position: relative;
-        z-index: 1;
-    }
-
-    </style>
+    
 </head>
 <body>
 
@@ -100,10 +76,12 @@ $selesai = $konek->query("SELECT COUNT(*) as n FROM deadlines WHERE user_id='$us
 
         <!-- TABEL DAFTAR DEADLINE -->
         <div class="pembungkus-tabel">
-            <div class="header-tabel">
+             <div class="header-tabel">
                 <span class="judul-tabel">Daftar Deadline</span>
             </div>
-            <table>
+
+            <div class="table-responsive">
+                <table>
                 <thead>
                     <tr>
                         <th>#</th>
@@ -151,9 +129,10 @@ $selesai = $konek->query("SELECT COUNT(*) as n FROM deadlines WHERE user_id='$us
                         <td colspan="7">Belum ada deadline. Yuk tambah deadline pertamamu!</td>
                     </tr>
                     <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
+                    </tbody>
+                    </table>
+                        </div>
+                    </div>
 
     </div>
 </body>
