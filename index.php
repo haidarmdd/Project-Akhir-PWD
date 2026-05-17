@@ -21,8 +21,8 @@ if (isset($_SESSION['user_id'])) {
     <div class="lapisan-gelap"></div>
 
     <!-- KONTEN UTAMA -->
-    <div class="konten-landing">
     <div class="pembungkus-landing">
+    <div class="konten-landing">
         <div>
             <div class="judul-landing">Deadline<span style="color:crimson">Ku</span></div>
             <p class="deskripsi-landing">Website kelola deadline tugas dan ujian kuliah kamu dalam satu tempat. <br> Bikin lebih rapi, terstruktur, dan tidak ada yang terlewat.</p>
