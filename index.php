@@ -1,38 +1,27 @@
-<?php
-session_start();
-// Jika sudah login, langsung ke dashboard
-if (isset($_SESSION['user_id'])) {
-    header("Location: dashboard.php");
-    exit;
-}
-?>
+<?php session_start(); if (isset($_SESSION['user_id'])) { header('Location: dashboard.php'); exit; } ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeadlineKu</title>
+    <title>DeadlineKu - Kelola Tugasmu</title>
     <link rel="stylesheet" href="style.css">
-    
 </head>
-<body>    
-
-    <!-- LAPISAN GELAP TRANSPARAN DI ATAS VIDEO -->
+<body>
     <div class="lapisan-gelap"></div>
 
-    <!-- KONTEN UTAMA -->
-    <div class="pembungkus-landing">
     <div class="konten-landing">
-        <div>
-            <div class="judul-landing">Deadline<span style="color:crimson">Ku</span></div>
-            <p class="deskripsi-landing">Website kelola deadline tugas dan ujian kuliah kamu dalam satu tempat. <br> Bikin lebih rapi, terstruktur, dan tidak ada yang terlewat.</p>
-            <p class="deskripsi-landing"></p>
+        <div class="pembungkus-landing">
+            <h1 class="judul-landing">Deadline<span style="color:#e74c3c">Ku</span></h1>
+            <p class="deskripsi-landing">
+                Kelola semua tugas, ujian, dan praktikum kuliahmu dalam satu tempat.<br>
+                Tidak ada lagi deadline yang terlewat.
+            </p>
             <div class="aksi-landing">
-                <a href="login.php" class="tombol tombol-utama">Login</a>
-                <a href="daftar.php" class="tombol tombol-sekunder">Daftar Akun</a>
+                <a href="login.php" class="tombol tombol-utama">Masuk</a>
+                <a href="daftar.php" class="tombol tombol-sekunder">Daftar Sekarang</a>
             </div>
         </div>
     </div>
-
 </body>
 </html>
