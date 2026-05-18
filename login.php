@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - DeadlineKu</title>
     <link rel="stylesheet" href="style.css">
-    
 </head>
 <body>
     <div class="pembungkus-auth">
         <div class="kartu-auth">
-            <div class="logo-auth">Deadline<span style="color:crimson ;">Ku</span></div>
+            <div class="logo-auth">Deadline<span>Ku</span></div>
             <p class="tagline-auth">Pelacak deadline akademik mahasiswa</p>
 
             <h2 class="judul-auth">Selamat datang!</h2>
@@ -40,10 +39,7 @@
                     <label class="label-formulir">Password</label>
                     <input type="password" name="password" class="input-formulir" placeholder="Masukkan password">
                 </div>
-                <div style="display:flex; justify-content:center; margin-top:10px;">
-                <button type="submit" class="tombol tombol-utama">Login</button>
-
-                </div>
+                <button type="submit" class="tombol tombol-utama" style="width:100%; justify-content:center; margin-top:8px;">Login</button>
             </form>
 
             <div class="footer-auth">

@@ -9,7 +9,7 @@
 <body>
     <div class="pembungkus-auth">
         <div class="kartu-auth">
-            <div class="logo-auth">DeadlineKu</div>
+            <div class="logo-auth">Deadline<span>Ku</span></div>
             <p class="tagline-auth">Pelacak deadline akademik mahasiswa</p>
 
             <h2 class="judul-auth">Buat akun baru</h2>
