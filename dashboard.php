@@ -34,14 +34,44 @@ $selesai = $konek->query("SELECT COUNT(*) as n FROM deadlines WHERE user_id='$us
 </head>
 <body>
 
-    <!-- NAV -->
-    <nav class="navbar">
-        <div class="navbar-brand">Deadline<span style="color: crimson;">Ku</span></div>
-        <div class="navbar-menu">
-            <div class="navbar-pengguna">Halo, <span><?php echo $nama; ?></span></div>
-            <a href="logout.php" class="tombol tombol-sekunder tombol-kecil">Keluar</a>
+<div class="lapisan-gelap"></div>
+
+    <!-- NAVBAR -->
+<nav class="navbar">
+
+    <!-- LOGO -->
+    <div class="navbar-brand">
+        Deadline<span style="color: crimson;">Ku</span>
+    </div>
+
+    <!-- MENU -->
+    <div class="navbar-menu">
+
+        <!-- NAMA USER -->
+        <div class="navbar-pengguna">
+            Halo, <span><?php echo $nama; ?></span>
         </div>
-    </nav>
+
+        <!-- DASHBOARD AKTIF -->
+        <a href="dashboard.php" 
+           class="tombol tombol-utama tombol-kecil">
+           Dashboard
+        </a>
+
+        <!-- MENU RIWAYAT -->
+        <a href="riwayat.php" 
+           class="tombol tombol-sekunder tombol-kecil">
+           Riwayat
+        </a>
+
+        <!-- LOGOUT -->
+        <a href="logout.php" 
+           class="tombol tombol-bahaya tombol-kecil">
+           Logout
+        </a>
+
+    </div>
+</nav>
 
     <div class="wadah">
 

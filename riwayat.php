@@ -15,7 +15,7 @@ $nama    = $_SESSION['nama'] ?? 'Pengguna';
 $sql = "SELECT * FROM deadlines 
         WHERE user_id = ? AND status = 'selesai' 
         ORDER BY semester ASC, tanggal_deadline ASC";
-$stmt = $conn->prepare($sql);
+$stmt = $konek->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -45,14 +45,42 @@ $semester_aktif = isset($_GET['semester']) ? $_GET['semester'] : ($semester_keys
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="lapisan-gelap"></div>
 
 <!-- NAVBAR -->
 <nav class="navbar">
-    <div class="navbar-brand">Deadline<span>Ku</span></div>
+
+    <!-- LOGO -->
+    <div class="navbar-brand">
+        Deadline<span style="color: crimson;">Ku</span>
+    </div>
+
+    <!-- MENU -->
     <div class="navbar-menu">
-        <span class="navbar-pengguna">Halo, <span><?= htmlspecialchars($nama) ?></span>!</span>
-        <a href="dashboard.php" class="tombol tombol-sekunder tombol-kecil">Dashboard</a>
-        <a href="logout.php" class="tombol tombol-bahaya tombol-kecil">Logout</a>
+
+        <!-- NAMA USER -->
+        <div class="navbar-pengguna">
+            Halo, <span><?= htmlspecialchars($nama) ?></span>
+        </div>
+
+        <!-- MENU DASHBOARD -->
+        <a href="dashboard.php" 
+           class="tombol tombol-sekunder tombol-kecil">
+           Dashboard
+        </a>
+
+        <!-- RIWAYAT AKTIF -->
+        <a href="riwayat.php" 
+           class="tombol tombol-utama tombol-kecil">
+           Riwayat
+        </a>
+
+        <!-- LOGOUT -->
+        <a href="logout.php" 
+           class="tombol tombol-bahaya tombol-kecil">
+           Logout
+        </a>
+
     </div>
 </nav>
 
