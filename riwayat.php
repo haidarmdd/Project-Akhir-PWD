@@ -203,7 +203,7 @@ $semester_aktif = isset($_GET['semester']) ? $_GET['semester'] : ($semester_keys
     <div class="pembungkus-tabel">
         <div class="baris-kosong">
             <p style="text-align:center;padding:60px 20px;color:#4b5563;margin:0">
-                Belum ada tugas yang selesai. Yuk selesaikan tugasmu! &#127919;
+                Belum ada riwayat tugas &#127919;
             </p>
         </div>
     </div>

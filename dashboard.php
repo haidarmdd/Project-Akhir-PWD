@@ -156,7 +156,7 @@ $selesai = $konek->query("SELECT COUNT(*) as n FROM deadlines WHERE user_id='$us
                     <!-- Tampilkan pesan jika belum ada data -->
                     <?php if ($total == 0): ?>
                     <tr class="baris-kosong">
-                        <td colspan="7">Belum ada deadline. Yuk tambah deadline pertamamu!</td>
+                        <td colspan="7">Belum ada deadline</td>
                     </tr>
                     <?php endif; ?>
                     </tbody>
