@@ -1,11 +1,6 @@
-/* ================================
-   IMPORT FONT
-   ================================ */
+/* IMPORT FONT */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-/* ================================
-   RESET & BASE
-   ================================ */
 * {
     margin: 0;
     padding: 0;
@@ -32,9 +27,6 @@ button, input, select, textarea {
     outline: none;
 }
 
-/* ================================
-   NAVBAR
-   ================================ */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -74,9 +66,7 @@ button, input, select, textarea {
     font-weight: 700;
 }
 
-/* ================================
-   CONTAINER
-   ================================ */
+/* CONTAINER */
 .wadah {
     max-width: 1100px;
     margin: auto;
@@ -85,9 +75,7 @@ button, input, select, textarea {
     z-index: 1;
 }
 
-/* ================================
-   HEADER DASHBOARD
-   ================================ */
+/* HEADER DASHBOARD */
 .header-dashboard {
     display: flex;
     justify-content: space-between;
@@ -109,9 +97,7 @@ button, input, select, textarea {
     font-size: 14px;
 }
 
-/* ================================
-   BUTTONS
-   ================================ */
+/* BUTTONS */
 .tombol {
     border: none;
     padding: 11px 20px;
@@ -181,9 +167,7 @@ button, input, select, textarea {
     margin-top: 8px;
 }
 
-/* ================================
-   STATISTIK CARDS
-   ================================ */
+/* STATISTIK CARDS */
 .grid-statistik {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -258,9 +242,7 @@ button, input, select, textarea {
     color: #4ade80;
 }
 
-/* ================================
-   TABEL
-   ================================ */
+/* TABEL */
 .pembungkus-tabel {
     background: #1616163d;
     border: 1px solid #242424;
@@ -403,9 +385,7 @@ tr:hover td {
     border: 1px solid rgba(251, 146, 60, 0.2);
 }
 
-/* ================================
-   FORM (TAMBAH / EDIT)
-   ================================ */
+/* FORM (TAMBAH / EDIT) */
 .kartu-formulir {
     max-width: 620px;
     margin: 28px auto 0;
@@ -463,9 +443,7 @@ tr:hover td {
     margin-top: 10px;
 }
 
-/* ================================
-   AUTH (LOGIN & DAFTAR)
-   ================================ */
+/* AUTH (LOGIN & DAFTAR) */
 .pembungkus-auth {
     min-height: 100vh;
     display: flex;
@@ -578,9 +556,7 @@ tr:hover td {
     text-decoration: underline;
 }
 
-/* ================================
-   DIVIDER
-   ================================ */
+/* DIVIDER */
 .divider-auth {
     display: flex;
     align-items: center;
@@ -598,9 +574,7 @@ tr:hover td {
     background: #242424;
 }
 
-/* ================================
-   PERINGATAN (ALERT)
-   ================================ */
+/* PERINGATAN (ALERT) */
 .peringatan {
     padding: 12px 16px;
     border-radius: 10px;
@@ -621,9 +595,7 @@ tr:hover td {
     color: #4ade80;
 }
 
-/* ================================
-   LANDING PAGE (INDEX)
-   ================================ */
+/* LANDING PAGE (INDEX) */
 .lapisan-gelap {
     position: fixed;
     inset: 0;
@@ -672,9 +644,7 @@ tr:hover td {
     flex-wrap: wrap;
 }
 
-/* ================================
-   FILTER BAR
-   ================================ */
+/* FILTER BAR */
 .filter-bar {
     display: flex;
     gap: 10px;
@@ -696,9 +666,7 @@ tr:hover td {
     font-size: 13px;
 }
 
-/* ================================
-   RESPONSIVE
-   ================================ */
+/* RESPONSIVE */
 @media (max-width: 992px) {
     .grid-statistik {
         grid-template-columns: repeat(2, 1fr);
@@ -779,9 +747,7 @@ tr:hover td {
     border: 1px solid #c0392b;
 }
 
-/* ================================
-   TAB SEMESTER
-   ================================ */
+/* TAB SEMESTER */
 .tab-semester {
     display: flex;
     gap: 12px;
